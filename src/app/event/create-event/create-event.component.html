@@ -1,0 +1,49 @@
+<form #createForm="ngForm" (ngSubmit)="createForm.valid && createEvent(createForm)">
+    <div class="form-group">
+        <label for="InputName">Event Name</label>
+        <input type="text" class="form-control" id="inputName"   placeholder="Enter event name" required [(ngModel)]="event.name" name="eventName" #eventName="ngModel">
+        <div *ngIf="(createForm.submitted && eventName.invalid)"
+        class="alert alert-danger">
+            <div *ngIf="eventName.errors?.['required']">
+              Name is required.
+            </div>
+          </div>
+      </div>
+
+      <div class="form-group">
+        <label for="InputDate">Event Date and time</label>
+        <input class="form-control" type="datetime-local" id="InputDate" required [(ngModel)]="event.eventDate" name="eventDate" #eventDate="ngModel">       
+        <div *ngIf="(createForm.submitted && eventDate.invalid)"
+        class="alert alert-danger">
+            <div *ngIf="eventDate.errors?.['required']">
+              Date is required.
+            </div>
+          </div>    
+      </div>
+
+    <div class="form-group">
+        <label for="InputLocation">Event Location</label>
+        <input type="text" class="form-control" id="InputLocation"  placeholder="Enter event location"  required [(ngModel)]="event.eventLocation" name="eventLocation" #eventLocation="ngModel"> 
+        
+        <div *ngIf="(createForm.submitted && eventLocation.invalid)"
+        class="alert alert-danger">
+            <div *ngIf="eventLocation.errors?.['required']">
+              Event Location is required.
+            </div>
+          </div>    
+      </div>
+
+      <div class="form-group">
+        <label for="SummaryInput">Summary</label>
+        <textarea class="form-control" id="SummaryInput" rows="3" placeholder="Enter details about the event" required [(ngModel)]="event.summary" name="eventSummary" #eventSummary="ngModel"></textarea>
+        <div *ngIf="(createForm.submitted && eventSummary.invalid)"
+        class="alert alert-danger">
+            <div *ngIf="eventSummary.errors?.['required']">
+              Event Summary is required.
+            </div>
+          </div>    
+      </div>
+
+      <input type="submit" id="submitButton" class="btn btn-primary" value="Add New Event">
+</form>
+

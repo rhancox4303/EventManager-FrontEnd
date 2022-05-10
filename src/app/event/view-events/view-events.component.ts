@@ -10,39 +10,48 @@ import { CommunicatorService } from '../communicator.service';
 })
 export class ViewEventsComponent implements OnInit {
 
-  eventList$!: Observable<any[]> 
+  // Observable that contains array of events.
+  eventList!: Observable<any[]> 
+
+
+  // Create the eventAPI and Communicator services
   constructor(private eventService:EventApiService,private comService:CommunicatorService) { 
+    // Subscribe to the com service. When a message is sent reset editModal to false and update the list.
     this.comService.updatedListMessage.subscribe( message => {
-      this.isEditModalActive = false
+      this.isEditViewModalActive = false
       this.updateList()
     })
   }
 
+  // On Init update the list.
   ngOnInit(): void {
     this.updateList()  
   }
 
+  // event used to hold the specific event that the edit, delete or view button is being press for.
   event:any;
-  isEditModalActive:boolean = false;
+  isEditViewModalActive:boolean = false;
 
+  // Resets the isEditViewModalActive to false.
   closeModal(){
-    this.isEditModalActive = false
+    this.isEditViewModalActive = false
   }
 
+  // Activates the viewEditModal by setting isEditViewModalActive to true and assigning the passed in event.
   activateViewEditModal(event:any){
-    console.log('The new event')
-    console.log(event)
     this.event = event
-    this.isEditModalActive = true
+    this.isEditViewModalActive = true
   }
 
-  deleteEvent(item:any){
-    this.eventService.deleteEvent(item.id).subscribe( res =>
+  // Deletes the selected event using the eventService deleteEvent method.
+  deleteEvent(event:any){
+    this.eventService.deleteEvent(event.id).subscribe( res =>
       this.updateList()  
     )
   }
 
+  // Update the eventList using the eventService method getAllEvents
   updateList(){
-    this.eventList$ = this.eventService.getAllEvents()
+    this.eventList = this.eventService.getAllEvents()
   }
 }

@@ -1,36 +1,34 @@
+<!--Form used to edit or view Event-->
 <form #editForm="ngForm"(ngSubmit)="editForm.valid && editEvent()">
     <div class="form-group">
         <label for="InputName">Event Name</label>
         <input type="text"  
         [disabled]="disableInput"  class="form-control" id="InputName"  placeholder="Enter event name" required [(ngModel)]="name" name="eventName" #eventName="ngModel">
-        <div *ngIf="(editForm.submitted && eventName.invalid)"
-        class="alert alert-danger">
-            <div *ngIf="eventName.errors?.['required']">
+        <div *ngIf="(editForm.submitted && eventName.invalid)"lass="alert alert-danger">
+          <div *ngIf="eventName.errors?.['required']">
               Name is required.
-            </div>
           </div>
+        </div>
       </div>
-            <div class="form-group">
+
+      <div class="form-group">
         <label for="InputDate">Event Date and time</label>
         <input class="form-control" [disabled]="disableInput" type="datetime-local" id="InputDate" required [(ngModel)]="date" name="eventDate" #eventDate="ngModel">       
-        <div *ngIf="(editForm.submitted && eventDate.invalid)"
-        class="alert alert-danger">
-            <div *ngIf="eventDate.errors?.['required']">
-              Date is required.
-            </div>
-          </div>   
-    
+        <div *ngIf="(editForm.submitted && eventDate.invalid)" class="alert alert-danger">
+          <div *ngIf="eventDate.errors?.['required']">
+            Date is required.
+          </div>
+        </div>   
       </div>
+
     <div class="form-group">
         <label for="InputLocation">Event Location</label>
         <input type="text" [disabled]="disableInput" class="form-control" id="InputLocation"  placeholder="Enter event location" required [(ngModel)]="location" name="eventLocation" #eventLocation="ngModel"> 
-        <div *ngIf="(editForm.submitted && eventLocation.invalid)"
-        class="alert alert-danger">
-            <div *ngIf="eventLocation.errors?.['required']">
-              Event Location is required.
-            </div>
-          </div>   
-      
+        <div *ngIf="(editForm.submitted && eventLocation.invalid)" class="alert alert-danger">
+          <div *ngIf="eventLocation.errors?.['required']">
+            Event Location is required.
+          </div>
+        </div>   
       </div>
 
       <div class="form-group">

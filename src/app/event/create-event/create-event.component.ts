@@ -10,16 +10,19 @@ import { CommunicatorService } from '../communicator.service';
 })
 export class CreateEventComponent implements OnInit {
 
+  // Create event used to model ngForm.
   event:any={name: "",
     eventDate: null,
     eventLocation: "",
     summary: ""}
 
+  // Create the eventAPI and Communicator services
   constructor(private eventService:EventApiService,private comService:CommunicatorService) { }
 
   ngOnInit(): void {
   }
 
+  // Create a new event using the eventService CreateEvent method
   createEvent(form:NgForm){
     
     var newEvent = {

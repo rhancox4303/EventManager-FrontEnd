@@ -28,7 +28,7 @@ export class EventApiService {
       return this.httpclient.put(this.eventAPIUrl + `/events/${id}`,event)
     }
 
-  // DELETE request that edits an event
+  // DELETE request that deletes an event
   deleteEvent(id:number){
     return this.httpclient.delete(this.eventAPIUrl + `/events/${id}`)
   }

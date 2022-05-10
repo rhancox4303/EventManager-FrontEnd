@@ -9,26 +9,28 @@ import { CommunicatorService } from '../communicator.service';
 })
 export class EditEventComponent implements OnInit {
 
+  // Create the eventAPI and Communicator services.
   constructor(private eventService:EventApiService,private comService:CommunicatorService) { }
 
+  // Use Input to get event and disableInput from View-Events component.
   @Input() event:any;
   @Input() disableInput!:boolean;
-  id: number = -1;
+
   name:string=""
   date: Date= new Date()
   location: string=""
   summary: string=""
 
+  // Assign event properties to the ngModel variables.
   ngOnInit(): void {
-    this.id = this.event.id
     this.name = this.event.name
     this.date = this.event.eventDate
     this.location = this.event.eventLocation
     this.summary = this.event.summary
   }
 
+  // Edit a new event using the eventService editEvent method.
   editEvent(){
-    console.log(this.disableInput)
     var changedEvent = {
       id: this.event.id,
       name: this.name,
@@ -38,11 +40,14 @@ export class EditEventComponent implements OnInit {
     }
 
     this.eventService.editEvent(this.event.id,changedEvent).subscribe( res=> {
+      // Use the comServiec to notify the View-Events to update the list.
       this.comService.sendUpdatedList("Update List")
-    var modalCloseButton = document.getElementById("modalCloseButton");
-    if(modalCloseButton){
-      modalCloseButton.click();
-    }
+
+      // Click the close Modal Button
+      var modalCloseButton = document.getElementById("modalCloseButton");
+      if(modalCloseButton){
+        modalCloseButton.click();
+      }
     })
   }
 }
